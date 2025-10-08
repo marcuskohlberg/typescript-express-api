@@ -1,7 +1,10 @@
-import { http } from "@ampt/sdk";
 import express, { Router } from "express";
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(express.static('static'));
 
 const api = Router();
 
@@ -28,4 +31,6 @@ api.post("/submit", async (req, res) => {
 
 app.use("/api", api);
 
-http.node.use(app);
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
